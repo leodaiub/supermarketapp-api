@@ -10,8 +10,8 @@ const upload = multer(uploadConfig);
 
 routes.get('/', marketController.index);
 routes.post('/market', upload.single('image'), marketController.store);
-routes.put('/market/id', editController.store);
-routes.delete('/market/id', deleteController.delete);
+//routes.put('/market/id', editController.store);
+//routes.delete('/market/id', deleteController.delete);
 
 
 module.exports = routes;

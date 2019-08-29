@@ -1,26 +1,30 @@
 const { Schema, model } = require('mongoose');
 
 const marketSchema = new Schema({
-    name: {
+    superMarketName: {
         type: String,
         require: true,
     },
-    user: {
+    superMarketPhone: {
         type: String,
         required: true,
     },
-    bio: String,
-    avatar: {
+    superMarketDescription: String,
+    superMarketLocation: {
+        street: String,
+        number:String, 
+        district:String, 
+        zip:String, 
+        country:String, 
+        city:String, 
+        state: String,
+    },
+    superMarketMainImage: {
         type: String,
         required: true,
     },
-    likes: [{
-        type: Schema.Types.ObjectId,
-        ref: 'dev',
-    }],
-    dislikes: [{
-        type: Schema.Types.ObjectId,
-        ref: 'dev',
+    superMarketAdditionalImages: [{
+        type: String,
     }],
 }, {
     timestamps: true
