@@ -3,11 +3,14 @@ const mongoose = require('mongoose');
 const path = require ('path');
 const cors = require ('cors');
 
+
 const app = express();
 const server = require('http').Server(app);
 const io = require('socket.io')(server);
 
-mongoose.connect('mongodb+srv://leodaiub:catwalktest@supermarketapp-ov2ac.mongodb.net/test?retryWrites=true&w=majority', {
+app.use(express.json());
+
+mongoose.connect('mongodb+srv://leodaiub:catwalktest@supermarketapp-ov2ac.mongodb.net/Development?retryWrites=true&w=majority', {
   useNewUrlParser: true,
 });
 

@@ -19,15 +19,16 @@ const marketSchema = new Schema({
         city:String, 
         state: String,
     },
-    superMarketMainImage: {
-        type: String,
-        required: true,
-    },
-    superMarketAdditionalImages: [{
-        type: String,
-    }],
+    // superMarketMainImage: {
+    //     type: String,
+    //     required: true,
+    // },
+    // superMarketAdditionalImages: [{
+    //     type: String,
+    // }],
 }, {
-    timestamps: true
+    timestamps: true,
+    collection: 'SuperMarkets'
 });
 
 module.exports = model('market', marketSchema);
