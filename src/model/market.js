@@ -18,14 +18,18 @@ const marketSchema = new Schema({
         country:String, 
         city:String, 
         state: String,
+        required: true,
+        type: Object,
     },
-    // superMarketMainImage: {
-    //     type: String,
-    //     required: true,
-    // },
-    // superMarketAdditionalImages: [{
-    //     type: String,
-    // }],
+    superMarketMainImage: {
+        type: String,
+        required: true,
+        ref: 'market',
+    },
+    superMarketAdditionalImages: [{
+        type: Array,
+        ref: 'market',
+    }],
 }, {
     timestamps: true,
     collection: 'SuperMarkets'

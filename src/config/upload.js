@@ -1,46 +1,59 @@
-var multer  = require('multer');
-var AWS = require('aws-sdk');
-var storage = multer.memoryStorage({
-    destination: function(req, file, callback) {
-        callback(null, '');
-    }
-});
-var multipleUpload = multer({ storage: storage }).array('file');
-var upload = multer({ storage: storage }).single('file');
-const BUCKET_NAME = 'BUCKET_NAME';
-const IAM_USER_KEY = 'USER_KEY';
-const IAM_USER_SECRET = 'USER_SECRET_KEY';
-router.post('/upload',multipleUpload, function (req, res) {
-  const file = req.files;
-let s3bucket = new AWS.S3({
-    accessKeyId: IAM_USER_KEY,
-    secretAccessKey: IAM_USER_SECRET,
-    Bucket: 'BUCKET_NAME'
-  });
-s3bucket.createBucket(function () {
-      let Bucket_Path = 'BUCKET_PATH';
-      //Where you want to store your file
-      var ResponseData = [];
-   
-file.map((item) => {
-      var params = {
-        Bucket: BucketPath,
-        Key: item.originalname,
-        Body: item.buffer,
-        ACL: 'public-read'
-  };
-s3bucket.upload(params, function (err, data) {
-        if (err) {
-         res.json({ "error": true, "Message": err});
-        }else{
-            ResponseData.push(data);
-            if(ResponseData.length == file.length){
-              res.json({ "error": false, "Message": "File Uploaded    SuceesFully", Data: ResponseData});
-            }
-          }
-       });
-     });
-   });
-});
+const multer = require("multer");
+const path = require("path");
+const crypto = require("crypto");
+const aws = require("aws-sdk");
+const multerS3 = require("multer-s3");
 
-module.exports = upload;
+const storageTypes = {
+  local: multer.diskStorage({
+    destination: (req, file, cb) => {
+      cb(null, path.resolve(__dirname, "..", "..", "tmp", "uploads"));
+    },
+    filename: (req, file, cb) => {
+      crypto.randomBytes(16, (err, hash) => {
+        if (err) cb(err);
+
+        file.key = `${hash.toString("hex")}-${file.originalname}`;
+
+        cb(null, file.key);
+      });
+    }
+  }),
+  s3: multerS3({
+    s3: new aws.S3(),
+    bucket: process.env.BUCKET_NAME,
+    contentType: multerS3.AUTO_CONTENT_TYPE,
+    acl: "public-read",
+    key: (req, file, cb) => {
+      crypto.randomBytes(16, (err, hash) => {
+        if (err) cb(err);
+
+        const fileName = `${hash.toString("hex")}-${file.originalname}`;
+
+        cb(null, fileName);
+      });
+    }
+  })
+};
+
+module.exports = {
+  dest: path.resolve(__dirname, "..", "..", "tmp", "uploads"),
+  storage: storageTypes[process.env.STORAGE_TYPE],
+  limits: {
+    fileSize: 2 * 1024 * 1024
+  },
+  fileFilter: (req, file, cb) => {
+    const allowedMimes = [
+      "image/jpeg",
+      "image/pjpeg",
+      "image/png",
+      "image/gif"
+    ];
+
+    if (allowedMimes.includes(file.mimetype)) {
+      cb(null, true);
+    } else {
+      cb(new Error("Invalid file type."));
+    }
+  }
+};

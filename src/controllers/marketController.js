@@ -1,7 +1,8 @@
-const Market = require('../model/market');
+const Market = require('../model/Market');
 const sharp = require('sharp');
 const path = require('path');
 const fs = require('fs');
+const Upload = require('../model/Upload');
 
 module.exports = {
 
@@ -25,32 +26,18 @@ module.exports = {
                 superMarketName, 
                 superMarketPhone, 
                 superMarketDescription, 
-                superMarketLocation, 
-                //superMarketMainImage, 
-                //superMarketAdditionalImages 
-                
+                superMarketLocation,                 
                 } = req.body;
-                                            // const { filename: image} = req.files;
 
-                                            // const [name] = image.split('.');
-                                            // const fileName = `${name}.jpg`;
-
-                                            // await sharp(req.file.path)
-                                            //     .resize(500)
-                                            //     .jpeg({quality: 70})    
-                                            //     .toFile(
-                                            //         path.resolve(req.file.destination, 'resized', fileName)
-                                            //     )
-
-                                            // fs.unlinkSync(req.file.path);
+        const phone = superMarketPhone + "+5511";
         
         const market = await Market.create({
             superMarketName,
             superMarketPhone,
             superMarketDescription,
             superMarketLocation,
-           // superMarketMainImage,
-           // superMarketAdditionalImages
+            // superMarketMainImage,
+            // superMarketAdditionalImages
         });
 
         req.io.emit('market', market);
@@ -61,12 +48,7 @@ module.exports = {
     
     // -> Update the supermarket by ID
 
-    async update(req, res) {
-        // => Validação de campos vazios:
-        // if (!req.body.nomeFuncionario || !req.body.cargo || !req.body.numeroIdentificador) {
-        //   return res.status(400).send({ message: 'Os campos não podem ser vazios.' });
-        // }
-      
+    async update(req, res) {  
         const market = await Market.findByIdAndUpdate(req.params.id, req.body);
         return res.status(200).send({ message: 'Supermarket successfully updated', market });
       },
