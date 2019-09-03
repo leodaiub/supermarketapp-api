@@ -7,24 +7,13 @@ const multerConfig = require("./config/upload");
 
 const routes = new express.Router();
 
-routes.post("/posts", multer(multerConfig).array('superMarketAdditionalImages', 2), async (req, res) => {
-  
-    
-    const { originalname: name, size, key, location: url = "" } = req.files[1];
-  
-    const post = await Post.create({
-      name,
-      size,
-      key,
-      url
-    });
-  
-    return res.json(post);
-  });
+// routes.post("/posts", multer(multerConfig)
+// .array('superMarketAdditionalImages', 2), marketController.store);
 
 routes.get('/', marketController.index);
 routes.get('/market/:id', marketController.findById);
-routes.post('/market', marketController.store);
+routes.post('/market',multer(multerConfig)
+.array('superMarketAdditionalImages', 2), marketController.store);
 routes.put('/market/:id', marketController.update);
 routes.delete('/market/:id', marketController.delete);
 

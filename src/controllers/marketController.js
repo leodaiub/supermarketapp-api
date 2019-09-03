@@ -1,8 +1,4 @@
 const Market = require('../model/Market');
-const sharp = require('sharp');
-const path = require('path');
-const fs = require('fs');
-const Upload = require('../model/Upload');
 
 module.exports = {
 
@@ -22,27 +18,30 @@ module.exports = {
   
     // -> Create the supermarket.
     async store(req, res) {
-        const {
-                superMarketName, 
+
+        const [{ originalname: name, size, key, location: url = "" }] = req.files;
+
+        const { superMarketName, 
                 superMarketPhone, 
                 superMarketDescription, 
                 superMarketLocation,                 
                 } = req.body;
 
-        const phone = superMarketPhone + "+5511";
+        const superMarketMainImage = req.files[0];
+
+        const superMarketAdditionalImages = req.files.shift();
         
         const market = await Market.create({
             superMarketName,
             superMarketPhone,
             superMarketDescription,
             superMarketLocation,
-            // superMarketMainImage,
-            // superMarketAdditionalImages
+            superMarketMainImage,
+            superMarketAdditionalImages
         });
 
         req.io.emit('market', market);
         return res.json(market);
-
     },
 
     
