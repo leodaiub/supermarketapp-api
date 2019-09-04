@@ -29,6 +29,6 @@ app.use(
 
 app.use(require('./src/routes'));
 
-server.listen(process.env.PORT || 3000, () => {
-  console.log(`Server running at 3000`);
+server.listen(process.env.PORT || 3030, () => {
+  console.log(`Server running at 3030`);
 });
