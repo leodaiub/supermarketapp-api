@@ -4,12 +4,12 @@
 
 This is and RESTful API wich can perfom full CRUD's( create, read, update, delete ).
 
-## GET REQUEST
+##### GET REQUEST
 
-## GET REQUEST BY ID
+##### GET REQUEST BY ID
 
-## POST REQUEST
+##### POST REQUEST
 
-## PUT REQUEST
+##### PUT REQUEST
 
-## DELETE REQUEST BY ID
+##### DELETE REQUEST BY ID
