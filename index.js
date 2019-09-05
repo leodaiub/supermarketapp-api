@@ -14,6 +14,7 @@ app.use(cors());
 mongoose.connect('mongodb+srv://leodaiub:catwalktest@supermarketapp-ov2ac.mongodb.net/Development?retryWrites=true&w=majority', {
   useNewUrlParser: true,
 });
+mongoose.set('useFindAndModify', false);
 
 app.use((req,res,next) => {
   req.io = io;

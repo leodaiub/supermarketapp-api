@@ -27,9 +27,11 @@ module.exports = {
                 superMarketLocation,                 
                 } = req.body;
 
-        const superMarketMainImage = req.files[0];
+        //const superMarketLocation2 = JSON.parse(superMarketLocation);
 
-        const superMarketAdditionalImages = req.files.shift();
+        const superMarketMainImage = req.files[0].url;
+
+        const superMarketAdditionalImages = req.files.shift().url;
         
         const market = await Market.create({
             superMarketName,
