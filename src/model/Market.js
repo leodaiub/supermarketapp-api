@@ -10,20 +10,20 @@ const s3 = new aws.S3();
 const marketSchema = new Schema({
     superMarketName: {
         type: String,
-        require: true,
+        //require: true,
     },
     superMarketPhone: {
         type: String,
-        required: true,
+        //required: true,
     },
     superMarketDescription: String,
     superMarketLocation: {
-        required: true,
+        //required: true,
         type: Object,
     },
     superMarketMainImage: {
         type: Object,
-        required: true,
+        //required: true,
     },
     superMarketAdditionalImages: [{
         type: Array,
