@@ -19,37 +19,41 @@ module.exports = {
     // -> Create the supermarket.
     async store(req, res) {
 
-        const [{ originalname: name, size, key, location: url = "" }] = req.files;
-
+        const { originalname: name, size, key, location: url = "" } = req.files;
+        
         const { superMarketName, 
                 superMarketPhone, 
                 superMarketDescription, 
                 superMarketLocation,                 
                 } = req.body;
 
-        const superMarketLocation2 = JSON.parse(JSON.stringify(superMarketLocation));
+        const files = [];
 
-        const superMarketMainImage = req.files[0];
-
-        const superMarketAdditionalImages = req.files.shift();
+        for ( let i = 0; req.files.length > i; i++){
+            files.push(req.files[i]);
+        }
+        
+        const superMarketMainImage = files.shift();
+        const superMarketAdditionalImages = files;
         
         const market = await Market.create({
             superMarketName,
             superMarketPhone,
             superMarketDescription,
-            superMarketLocation2,
+            superMarketLocation: JSON.parse(superMarketLocation),
             superMarketMainImage,
             superMarketAdditionalImages
         });
 
-        req.io.emit('market', market);
         return res.json(market);
+
     },
 
     
     // -> Update the supermarket by ID
 
-    async update(req, res) {  
+    async update(req, res) { 
+        console.log(req.body); 
         const market = await Market.findByIdAndUpdate(req.params.id, req.body);
         return res.status(200).send({ message: 'Supermarket successfully updated', market });
       },
