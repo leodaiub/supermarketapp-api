@@ -4,10 +4,8 @@ const mongoose = require('mongoose');
 const path = require ('path');
 const cors = require ('cors');
 
-
 const app = express();
 const server = require('http').Server(app);
-const io = require('socket.io')(server);
 
 app.use(express.json());
 app.use(cors());
@@ -16,9 +14,7 @@ mongoose.connect('mongodb+srv://leodaiub:catwalktest@supermarketapp-ov2ac.mongod
 });
 mongoose.set('useFindAndModify', false);
 
-app.use((req,res,next) => {
-  req.io = io;
-  
+app.use((req,res,next) => {  
   next();
 });
 

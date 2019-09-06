@@ -33,12 +33,6 @@ const marketSchema = new Schema({
     collection: 'SuperMarkets'
 });
 
-// marketSchema.pre("save", function() {
-//     if (!this.url) {
-//       this.url = `${process.env.APP_URL}/files/${this.key}`;
-//     }
-//   });
-  
 marketSchema.pre("remove", function() {
 if (process.env.STORAGE_TYPE === "s3") {
     return s3
