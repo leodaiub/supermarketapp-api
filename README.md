@@ -25,7 +25,7 @@ GET: https://supermarketappapi.leonardodaiub.com/market/:id
 Below is a example of a request
 ```
 curl --request GET \
-  --url http://localhost:3000/market/5d688785c401b931485dece4
+  --url https://supermarketappapi.leonardodaiub.com/market/5d688785c401b931485dece4
 ```
 ##### POST REQUEST
 
@@ -38,7 +38,7 @@ POST: https://supermarketappapi.leonardodaiub.com/market
 Below is a example of a request
 ```
 curl --request POST \
-  --url http://localhost:3030/market \
+  --url https://supermarketappapi.leonardodaiub.com/market \
   --header 'content-type: multipart/form-data; boundary=---011000010111000001101001' \
   --form superMarketName=Carrefour \
   --form superMarketPhone=55114234234 \
@@ -50,7 +50,7 @@ curl --request POST \
 ```
 ##### PUT REQUEST
 
-Performing a PUT request to /market:id with the Form Data containing the data updated fields of the Super Market.
+Performing a PUT request to /market:id with the Form Data containing the data in the state will update the changed fields to the database.
 ```
 PUT: https://supermarketappapi.leonardodaiub.com/market/:id
 ```
@@ -58,7 +58,7 @@ PUT: https://supermarketappapi.leonardodaiub.com/market/:id
 Below is a example of a request
 ```
 curl --request PUT \
-  --url http://localhost:3000/market/5d688785c401b931485dece4 \
+  --url https://supermarketappapi.leonardodaiub.com/market/5d688785c401b931485dece4 \
   --header 'content-type: application/json' \
   --data ' {
     "superMarketLocation": {
@@ -83,5 +83,5 @@ DELETE: https://supermarketappapi.leonardodaiub.com/market/:id
 Below is a example of a request
 ```
 curl --request DELETE \
-  --url http://localhost:3000/market/5d687e28999f861e90510923
+  --url https://supermarketappapi.leonardodaiub.com/market/5d687e28999f861e90510923
 ```
