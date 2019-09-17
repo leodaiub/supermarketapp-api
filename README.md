@@ -2,7 +2,7 @@
 
 ## Fullstack app developed by me from scratch using React.js in the front-end, Node.js in the backend and MongoDB in the database.
 https://supermarketapp.leonardodaiub.com/
-This is an RESTful API wich can perfom full CRUD's( create, read, update, delete ), and will upload images to an Amazon S3 bucket.
+This is an RESTful API which can perfom full CRUD's( create, read, update, delete ), and will upload images to an Amazon S3 bucket.
 
 The back-end was deployed on Amazon Elastic Beanstalk and the front-end to Netlify(because it has a free tier, unlike DigitalOcean).
 
