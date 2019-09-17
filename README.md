@@ -17,7 +17,7 @@ GET: https://supermarketappapi.leonardodaiub.com/
 
 ##### GET REQUEST BY ID
 
-Performing a GET request on with the params /market/:id will return a specific record from the database by it's ID.
+Performing a GET request with the params /market/:id will return a specific record from the database by it's ID.
 ```
 GET: https://supermarketappapi.leonardodaiub.com/market/:id
 ```
@@ -29,7 +29,7 @@ curl --request GET \
 ```
 ##### POST REQUEST
 
-Performing a POST request to /market with the Form Data containing the data of the Super Market and it's images.
+Performing a POST request to /market with the Form Data containing the data of the Super Market and it's images will create a new Super Market.
 
 ```
 POST: https://supermarketappapi.leonardodaiub.com/market
@@ -48,7 +48,7 @@ curl --request POST \
   --form superMarketAdditionalImages= \
   --form superMarketAdditionalImages=
 ```
-##### PUT REQUEST
+##### PUT REQUEST BY ID
 
 Performing a PUT request to /market:id with the Form Data containing the data in the state will update the changed fields to the database.
 ```
